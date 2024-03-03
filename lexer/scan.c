@@ -1,9 +1,14 @@
 #include"defs.h"
 #include"data.h"
 #include"decl.h"
+#include<errno.h>
 
-
-
+int chpros(char *s, int c)
+{
+    char *p;                 // Pointer to the character
+    p = strchr(s, c);        // Find the character in the string
+    return (p ? p - s : -1); // Return the position of the characters
+}
 
 // next - get the next character from the input source code file
 static int next(void){
@@ -50,7 +55,7 @@ static int skip(void){
 int scanint(int c)
 {
     int k, val = 0;
-    while ((k = chpros("0123456789"), c) >= 0)
+    while ((k = chpros("0123456789",c)) >= 0)
     {
         val = val * 10 + (k - '0');
         c = next();
@@ -59,12 +64,7 @@ int scanint(int c)
     return val;
 }
 //chrpos - find a character in a string
-int chpros(char *s, int c)
-{
-    char *p;// Pointer to the character
-    p = strchr(s, c);// Find the character in the string
-    return (p ? p - s : -1);// Return the position of the characters
-}
+
 
 
 //scanning the tokens 
